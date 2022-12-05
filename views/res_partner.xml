@@ -1,0 +1,17 @@
+<odoo>
+    <record id="res_partner_form_view_inherit" model="ir.ui.view">
+        <field name="name">ResPartner Form Inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="authored_books" string="Authored Books" attrs="{'invisible': [('is_company', '=', True)]}">
+                    <field name="authored_book_ids"/>
+                </page>
+                <page name="published_books" string="Published Books" attrs="{'invisible': [('is_company', '=', False)]}">
+                    <field name="published_books_ids"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
