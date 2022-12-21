@@ -1,0 +1,57 @@
+<odoo>
+    <record id="library_member_action" model="ir.actions.act_window">
+        <field name="name">Library Member</field>
+        <field name="res_model">library.member</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Configuration" id="config_menu" parent="library_book_menu_root"/>
+    <menuitem name="Librarian Member" id="library_member_menu" parent="config_menu"
+              action="library_member_action"/>
+
+    <record id="library_member_form_view" model="ir.ui.view">
+        <field name="name">Library Member Form</field>
+        <field name="model">library.member</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="partner_id"/>
+                        <field name="date_start"/>
+                        <field name="date_of_birth"/>
+                    </group>
+                    <group>
+                        <field name="member_number"/>
+                        <field name="date_end"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="library_member_tree_view" model="ir.ui.view">
+        <field name="name">Library Member Tree</field>
+        <field name="model">library.member</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="partner_id"/>
+                <field name="date_start"/>
+                <field name="date_of_birth"/>
+                <field name="member_number"/>
+                <field name="date_end"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="library_member_search_view" model="ir.ui.view">
+        <field name="name">Library Member Search</field>
+        <field name="model">library.member</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="partner_id"/>
+                <field name="date_of_birth"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>

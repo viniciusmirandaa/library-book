@@ -13,6 +13,7 @@
         "security/ir.model.access.csv",
         "views/library_book.xml",
         "views/res_partner.xml",
+        "views/library_member.xml",
         ],
     'installable': True,
     'application': True,
