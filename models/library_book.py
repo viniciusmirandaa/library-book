@@ -3,6 +3,7 @@ from odoo import api, models, fields
 
 class LibraryBook(models.Model):
     _name = 'library.book'
+    _inherit = ['base.archive']
     _description = "Library Book"
     _rec_name = "short_name"
     _order = "date_release desc, name"
@@ -86,6 +87,19 @@ class LibraryBook(models.Model):
         string="Retail Price",
         currency_field="currency_id"
     )
+
+    test_prototype_inherit = fields.Char(
+    )
+
+    ref_doc_id = fields.Reference(
+        selection='_referencable_models',
+        string='Reference Document')
+
+    @api.model
+    def _referencable_models(self):
+        models = self.env['ir.model'].search([
+            ('field_id.name', '=', 'message_ids')])
+        return [(x.model, x.name) for x in models]
 
     def name_get(self):
         result = []

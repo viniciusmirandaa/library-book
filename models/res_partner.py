@@ -15,3 +15,7 @@ class ResPartner(models.Model):
         comodel_name="library.book",
         inverse_name="publisher_id"
     )
+
+    test_extension_inherit = fields.Char(
+        string='Field Test'
+    )
