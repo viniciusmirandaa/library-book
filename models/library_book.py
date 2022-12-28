@@ -3,7 +3,6 @@ from odoo import api, models, fields
 
 class LibraryBook(models.Model):
     _name = 'library.book'
-    _inherit = ['base.archive']
     _description = "Library Book"
     _rec_name = "short_name"
     _order = "date_release desc, name"
@@ -95,6 +94,8 @@ class LibraryBook(models.Model):
         selection='_referencable_models',
         string='Reference Document')
 
+    compute = fields.Integer(compute='compute_field')
+
     @api.model
     def _referencable_models(self):
         models = self.env['ir.model'].search([
@@ -106,3 +107,22 @@ class LibraryBook(models.Model):
         rec_name = "%s / (%s)" % (self.name, self.date_release)
         result.append((self.id, rec_name))
         return result
+
+    def compute_field(self):
+        book_ids = self.search([])
+
+        sorted_book = book_ids.sorted(key='name')
+        sorted_book2 = book_ids.sorted(key='name', reverse=True)
+
+        filtered_book = book_ids.filtered('name')
+        filtered_book2 = book_ids.filtered(lambda lm: len(lm.author_ids) > 1)
+
+        mapped_book = book_ids.mapped('author_ids.email')
+        mapped_book2 = book_ids.mapped('name')
+        mapped_book3 = book_ids.mapped('author_ids')
+        mapped_book4 = book_ids.mapped(lambda lm: lm.author_ids.name)
+        mapped_book5 = book_ids.mapped(lambda lm: lm.name)
+        mapped_book6 = book_ids.mapped(lambda lm: lm.author_ids)
+
+        self.compute = 1
+
