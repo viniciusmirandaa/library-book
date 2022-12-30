@@ -1,0 +1,43 @@
+<odoo>
+    <record id="library_book_categ_action" model="ir.actions.act_window">
+        <field name="name">Library Book Categ</field>
+        <field name="res_model">library.book.categ</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Library Book Categ" id="library_book_categ_menu_root" parent="config_menu"
+              action="library_book_categ_action"/>
+
+    <record id="library_book_categ_form_view" model="ir.ui.view">
+        <field name="name">Library Book Categ Form</field>
+        <field name="model">library.book.categ</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="library_book_categ+tree_view" model="ir.ui.view">
+        <field name="name">Library Book Categ Tree</field>
+        <field name="model">library.book.categ</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="library_book_categ_search_view" model="ir.ui.view">
+        <field name="name">Library Book Categ Search</field>
+        <field name="model">library.book.categ</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>
