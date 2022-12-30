@@ -82,6 +82,11 @@ class LibraryBook(models.Model):
         comodel_name="res.currency"
     )
 
+    categ_id = fields.Many2one(
+        comodel_name="library.book.categ",
+        string="Category"
+    )
+
     retail_price = fields.Monetary(
         string="Retail Price",
         currency_field="currency_id"
@@ -95,6 +100,14 @@ class LibraryBook(models.Model):
         string='Reference Document')
 
     compute = fields.Integer(compute='compute_field')
+
+    def avg_retail_price_per_category(self):
+        grouped_result = self.read_group(
+            domain=[('retail_price', "!=", False)],  # domain
+            fields=['categ_id', 'retail_price:avg'],  # fields to access
+            groupby=['categ_id']  # group_by
+        )
+        return grouped_result
 
     @api.model
     def _referencable_models(self):
@@ -125,4 +138,3 @@ class LibraryBook(models.Model):
         mapped_book6 = book_ids.mapped(lambda lm: lm.author_ids)
 
         self.compute = 1
-
