@@ -99,7 +99,9 @@ class LibraryBook(models.Model):
         selection='_referencable_models',
         string='Reference Document')
 
-    compute = fields.Integer(compute='compute_field')
+    record_set_operations_computed = fields.Integer(compute='record_set_operations')
+
+    get_metadata_computed = fields.Integer(compute='get_record_metadata')
 
     def avg_retail_price_per_category(self):
         grouped_result = self.read_group(
@@ -137,4 +139,8 @@ class LibraryBook(models.Model):
         mapped_book5 = book_ids.mapped(lambda lm: lm.name)
         mapped_book6 = book_ids.mapped(lambda lm: lm.author_ids)
 
-        self.compute = 1
+        self.record_set_operations_computed = 1
+
+    def get_record_metadata(self):
+        metadata = self.get_metadata()
+        record = self.env.ref('library-book.3')
