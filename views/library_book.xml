@@ -36,6 +36,8 @@
                         <field name="cover" widget="image" class="oe_avatar"/>
                         <field name="reader_rating"/>
                         <field name="ref_doc_id"/>
+<!--                        <field name="record_set_operations_computed"/>-->
+                        <field name="get_metadata_computed"/>
                     </group>
                 </group>
                 <group>
