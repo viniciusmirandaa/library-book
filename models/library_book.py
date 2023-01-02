@@ -142,5 +142,17 @@ class LibraryBook(models.Model):
         self.record_set_operations_computed = 1
 
     def get_record_metadata(self):
-        metadata = self.get_metadata()
-        record = self.env.ref('library-book.3')
+        metadata = self.env['res.partner'].search([])
+        metadata2 = metadata.get_metadata()
+
+        for value in metadata2:
+            xml_id = value.get('xmlid')
+            if xml_id:
+                rec = self.env.ref(xml_id)
+        record = self.env.ref('base.main_partner')
+
+        # books = self.browse([1, 2, 3])
+        books = self.browse(1)
+        # books = self.search([])
+
+        self.get_metadata_computed = 1
